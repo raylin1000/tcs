@@ -27,13 +27,13 @@
 >
 >_"I was coming to that,"_ the Knight said. _"The song really IS `A-SITTING ON A GATE': and the tune's my own invention."_
 >
->Lewis Carroll, _Through the looking glass_
+>Lewis Carroll, _Through the Looking Glass_
 >
 
 
 To a first approximation, computation can be thought of as a process that maps an _input_ to an _output_.
 
-![Our basic notion of _computation_ is some process that maps an input to an output](../figure/input_output.png){#figureid .class width=300px height=300px}
+![Our basic notion of _computation_ is some process that maps an input to an output.](../figure/input_output.png){#figureid .class width=300px height=300px}
 
 When discussing computation, it is important to separate the question of  __what__ is the task we need to perform (i.e., the _specification_) from the question of __how__ we achieve this task (i.e., the _implementation_).
 For example, as we've seen, there is more than one way to achieve the computational task of computing the product of two integers.
@@ -112,7 +112,7 @@ We often use Python, but that choice is rather arbitrary.
 Indeed, one of the messages of this course is that all programming language are in some sense _equivalent_ to one another, and hence we could have just as well used JavaScript, C, COBOL, Visual Basic or even [BrainF*ck](https://goo.gl/LKKNFK).
 >
 This is _not_ a programming course, and it is absolutely fine if you are not familiar with Python and don't follow the fine points of code  examples such as the above.
-Still you might find it instructive to try to parse them, with the help of websites such as Google or Stackoverflow.
+Still you might find it instructive to try to parse them, with the help of websites such as Google or Stack Overflow.
 In particular, the function `int2bits` above uses the fact that the  binary representation of a number $n$ is the list  $(\floor{\tfrac{n}{2^i}} \mod 2)_{i=0,\ldots,\floor{\log_2 n}}$, which in Python-speak is written as `[ floor(n / 2**i ) % 2 for i in range(floor(log(n,2))+1)]`.
 
 
@@ -175,7 +175,7 @@ Hence, if we used such simple concatenation then we would not be able to tell if
 
 The way to tackle this is to find a general representation for _pairs_ of numbers.
 If we were using a pen and paper, we would simply use a separator such as the semicolon symbol to represent, for example, the pair consisting of the numbers represented by $(0,1)$ and $(1,1,0,0,0,1)$ as the length-$9$ string $s$ "$01;110001$".
-By adding a little redundancy, We can do just that in the digital domain.
+By adding a little redundancy, we can do just that in the digital domain.
 The idea is that we will map the three element set $\Sigma = \{0,1,;\}$  to the four element set $\{0,1\}^2$ via the one-to-one map that takes $0$ to $00$, $1$ to $11$ and $;$ to $01$.
 
 > # {.example title="Representing a rational number as a string" #represnumberbypairs}
@@ -187,7 +187,7 @@ So we represent the rational number $r=19/36$ be the binary string $s=1111000011
 More generally, we obtained a representation of the non-negative rational numbers as binary strings by composing the following representations:
 >
 1. Representing a non-negative rational number as a pair of natural numbers. \
-2. Representing a natural number by a string via the binary representation. (We can use the representation of integers to handle rational numbers that can be negative. )\
+2. Representing a natural number by a string via the binary representation (we can use the representation of integers to handle rational numbers that can be negative.)\
 3. Combining 1 and 2 to obtain representation of a rational number as a pair of strings. \
 4. Representing a pair of strings over $\{0,1\}$ as a single string over $\Sigma = \{0,1,;\}$. \
 5. Representing a string over $\Sigma$ as a longer string over $\{0,1\}$.
@@ -264,8 +264,8 @@ Since two functions are identical if and only if they agree on every input, to d
 (All these quantifiers can be confusing, so let's again recap where we are and where we want to get to. We assumed by contradiction there  is a one-to-one $FtS$ and hence an onto $StF$. To get our desired contradiction we need to show the _existence_ of  a single $f^*$ such that for _every_ $x\in \{0,1\}^*$ there _exists_ $n\in \N$ on which $f^*$ and $g=StF(x)$ disagree.)
 >
 The idea is to construct $f^*$ iteratively: for every $x\in \{0,1\}^*$ we will "ruin" $f^*$ in one input $n(x)\in \N$ to ensure that $f^*(n(x)) \neq g(n(x))$ where $g=StF(x)$.
-If we are successful then this would ensure that $f^* \neq STF(x)$ for every $x$.
-Specifically, for every $x\in \{0,1\}^*$, let $n(x) \in N$ be the number $x_0 + 2x_1 + 4x_2 + \cdots +2^{k-1}x_{k-1} + 2^{k}$ where $k=|x|$.
+If we are successful then this would ensure that $f^* \neq StF(x)$ for every $x$.
+Specifically, for every $x\in \{0,1\}^*$, let $n(x) \in \N$ be the number $x_0 + 2x_1 + 4x_2 + \cdots +2^{k-1}x_{k-1} + 2^{k}$ where $k=|x|$.
 That is, $n(x) = 2^k + \sum_{i=0}^{k-1}2^i x_i$.
 If $x\neq x'$ then $n(x) \neq n(x')$  (we leave verifying this as an exercise to you, the reader).
 >
@@ -381,7 +381,7 @@ Let $k=|S|$ and $m=|T|$ and so write the elements of $S$ and $T$ as $S = \{ s_0 
 For the "if" direction, if $k \leq m$ we can simply define $E(s_i)=t_i$ for every $i\in [k]$.
 Clearly for $i \neq j$, $t_i = E(s_i) \neq E(s_j) = t_j$, and hence this function is one-to-one.
 In the other direction, suppose that $k>m$ and  $E: S \rightarrow T$ is some function. Then $E$ cannot be one-to-one.
-Indeed, for $i=0,1,\ldots,m-1$ let us "mark" the element $t_j=E(s_i)$ in $T$. If $t_j$ was marked before, then we have found two objects in $S$ mapping to the same element $t_j$. Otherwise, since $T$ has $m$ elements,  when we get to $i=m-1$ we mark all the objects in $T$. Hence, in this case $E(s_m)$ must map to an element that was already marked before.^[This direction is sometimes known as the "Pigeon Hole Principle": the principle that if you have pigeon coop with $m$ holes, and $k>m$ pigeons, then there must be two pigeon in the same hole. ]
+Indeed, for $i=0,1,\ldots,m-1$ let us "mark" the element $t_j=E(s_i)$ in $T$. If $t_j$ was marked before, then we have found two objects in $S$ mapping to the same element $t_j$. Otherwise, since $T$ has $m$ elements,  when we get to $i=m-1$ we mark all the objects in $T$. Hence, in this case $E(s_m)$ must map to an element that was already marked before.^[This direction is sometimes known as the "Pigeonhole Principle": the principle that if you have pigeon coop with $m$ holes, and $k>m$ pigeons, then there must be two pigeon in the same hole. ]
 
 Now the size of $\{0,1\}^n$ is $2^n$, and the size of $\{0,1\}^{\leq n}$ is only slightly bigger: $2^0 + 2^1 + \ldots + 2^n = 2^{n+1}-1$ by the formula for a [geometric series](https://en.wikipedia.org/wiki/Geometric_progression).
 
@@ -390,7 +390,7 @@ Now the size of $\{0,1\}^n$ is $2^n$, and the size of $\{0,1\}^{\leq n}$ is only
 
 ### Prefix free encoding { #prefixfreesec }
 
-In our discussion of the representation of rational numbers, we used the "hack" of encoding the alphabet $\{$,`0`,`1`,`;`$\}$ to represent tuples of strings as a single string.
+In our discussion of the representation of rational numbers, we used the "hack" of encoding the alphabet $\{$`0`,`1`,`;`$\}$ to represent tuples of strings as a single string.
 This turns out to be a special case of the  general paradigm of _prefix free_ encoding.
 An encoding function $E:\mathcal{O} \rightarrow \{0,1\}^*$ is _prefix free_ if  there are no two objects $o \neq o'$ such that the representation $E(o)$  is a _prefix_ of the representation $E(o')$. The definition of prefix is as you would expect: a length $n$ string $x$ is a prefix of a length $n' \geq n$ string $x'$ if $x_i=x'_i$ for every $1 \leq i \leq n$.
 Given a representation scheme for $\mathcal{O}$ with a prefix-free encoding map, we can use simple concatenation to encode tuples of objects in $\mathcal{O}$:
@@ -746,7 +746,7 @@ Abstractly, a _computational process_ is some process that takes an input which 
 This transformation of input to output can be done using a modern computer, a person following instructions, the evolution of some natural system, or any other means.
 
 
-![A computational process](../figure/computation.png){#figureid .class width=300px height=300px}
+![A computational process.](../figure/computation.png){#figureid .class width=300px height=300px}
 
 In future chapters, we will turn to mathematically defining  computational process, but, as we discussed above for now we want to focus on _computational tasks_; i.e., focus on the __specification__ and not the __implementation__.
 Again, at an abstract level, a computational task can specify any relation that the output needs to have with the input.
